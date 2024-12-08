@@ -1,0 +1,71 @@
+﻿@model HighLandCoffeeWebsite.Models.User
+
+@{
+    ViewBag.Title = "Chỉnh sửa người dùng";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+<div class="container mt-4">
+    <h2 class="text-center">Chỉnh sửa thông tin người dùng</h2>
+
+    @using (Html.BeginForm("EditUser", "Admin", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.UserId)
+
+        <div class="form-group">
+            <label>Tên tài khoản</label>
+            @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", placeholder = "Tên tài khoản" })
+        </div>
+        <div class="form-group">
+            <label>Mật khẩu</label>
+            <div class="input-group">
+                @Html.PasswordFor(model => model.Password, new { @class = "form-control", id = "passwordField", placeholder = "Nhập mật khẩu mới nếu muốn thay đổi", value = Model.Password })
+                <div class="input-group-append">
+                    <button type="button" class="btn btn-outline-secondary" onclick="togglePassword()" title="Hiển thị">
+                        <i class="bx bx-show" id="eyeIcon"></i>
+                    </button>
+                </div>
+            </div>
+            <small class="form-text text-muted">Để trống nếu không muốn thay đổi mật khẩu.</small>
+        </div>
+
+        <div class="form-group">
+            <label>Họ và tên</label>
+            @Html.TextBoxFor(model => model.FullName, new { @class = "form-control", placeholder = "Họ và tên" })
+        </div>
+
+        <div class="form-group">
+            <label>Email</label>
+            @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Email" })
+        </div>
+
+        <div class="form-group">
+            <label>Số điện thoại</label>
+            @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control", placeholder = "Số điện thoại" })
+        </div>
+        <div class="form-group">
+            <label>Địa chỉ</label>
+            @Html.TextBoxFor(model => model.Address, new { @class = "form-control", placeholder = "Địa chỉ" })
+        </div>
+        <button type="submit" class="btn btn-success mt-3">Cập nhật</button>
+        <a href="@Url.Action("Customer", "Admin")" class="btn btn-secondary mt-3">Quay lại</a>
+    }
+</div>
+<script>
+    function togglePassword() {
+        const passwordField = document.getElementById('passwordField');
+        const eyeIcon = document.getElementById('eyeIcon');
+
+        if (passwordField.type === 'password') {
+            passwordField.type = 'text'; // Hiển thị mật khẩu
+            eyeIcon.classList.remove('bx-show');
+            eyeIcon.classList.add('bx-hide');
+        } else {
+            passwordField.type = 'password'; // Ẩn mật khẩu
+            eyeIcon.classList.remove('bx-hide');
+            eyeIcon.classList.add('bx-show');
+        }
+    }
+</script>

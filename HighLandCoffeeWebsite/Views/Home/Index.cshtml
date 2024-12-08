@@ -1,0 +1,121 @@
+﻿@model List<HighLandCoffeeWebsite.Models.Product>
+@{ ViewBag.Title = "Index"; Layout = "~/Views/Shared/_LayoutPage.cshtml"; }
+
+<style>
+    .banner_section.layout_padding {
+        position: relative;
+        padding: 0;
+    }
+
+    .container {
+        padding: 0;
+    }
+</style>
+
+<link rel="stylesheet" href="~/Content/cssFormat.css" />
+<!-- banner section start -->
+<div class="banner_section layout_padding">
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="d-block w-100" src="~/Content/img/Banner1.png" alt="First slide">
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="~/Content/img/banner2.jpg" alt="Second slide">
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="~/Content/img/banner3.png" alt="Third slide">
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="fruite-item d-flex align-items-center bg-coffee">
+        <div class="fruite-img">
+            <img src="~/Content/img/menu2.png" class="img-fluid rounded-end" alt="Coffee">
+        </div>
+        <div class="text-content p-4">
+            <h4 class="text-white">CÀ PHÊ</h4>
+            <p class="text-white">Sự kết hợp hoàn hảo giữa hạt cà phê Robusta & Arabica thượng hạng được trồng trên những vùng cao nguyên Việt Nam màu mỡ, qua những bí quyết rang xay độc đáo, Highlands Coffee chúng tôi tự hào giới thiệu những dòng sản phẩm Cà phê mang hương vị đậm đà và tinh tế.</p>
+            <a href="@Url.Action("ViewProduct", "Product")" class="btn btn-light">Khám phá thêm</a>
+        </div>
+    </div>
+    <div class="fruite-item d-flex align-items-center bg-freeze">
+        <div class="text-content p-4">
+            <h4 class="text-white">FREEZE</h4>
+            <p class="text-white">Sảng khoái với thức uống đá xay phong cách Việt. Freeze là thức uống đá xay mát lạnh được pha chế từ những nguyên liệu thuần túy của Việt Nam.</p>
+            <a href="@Url.Action("ViewProduct", "Product")" class="btn btn-light">Khám phá thêm</a>
+        </div>
+        <div class="fruite-img">
+            <img src="~/Content/img/menu1.png" class="img-fluid rounded-start" alt="Freeze">
+        </div>
+    </div>
+    <div class="fruite-item d-flex align-items-center bg-tea">
+        <div class="fruite-img">
+            <img src="~/Content/img/menu3.png" class="img-fluid rounded-start" alt="Tea">
+        </div>
+        <div class="text-content p-4">
+            <h4 class="text-dark">TRÀ</h4>
+            <p class="text-dark">Hương vị tự nhiên, thơm ngon của Trà Việt với phong cách hiện đại tại Highlands Coffee sẽ giúp bạn gợi mở vị giác của bản thân và tận hưởng một cảm giác thật khoan khoái, tươi mới.</p>
+            <a href="@Url.Action("ViewProduct", "Product")" class="btn btn-light" style="color: #333; border: 1px solid #333;">Khám phá thêm</a>
+        </div>
+    </div>
+<style>
+    .fruite-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .fruite-img {
+        flex: 1;
+    }
+
+    .text-content {
+        flex: 2;
+        order: 0;
+    }
+
+        .text-content h4, .text-content p, .text-content a {
+            margin-bottom: 1rem;
+        }
+    .bg-coffee {
+        background-color: #0a0a0a; /* Màu nền cho Coffee */
+    }
+
+    .bg-freeze {
+        background-color: #9ebf84; /* Màu nền cho Freeze */
+    }
+
+    .bg-tea {
+        background-color: #fff3b5; /* Màu nền cho Tea */
+    }
+    .text-content h4 {
+        font-size: 2.4rem;
+        font-weight: bold;
+    }
+
+    .text-content p {
+        font-size: 1.5rem;
+        margin: 20px 0;
+    }
+    .text-content .btn {
+        background-color: transparent;
+        color: #fff;
+        padding: 12px 24px;
+        border-radius: 25px;
+        font-size: 1.1rem;
+        text-transform: uppercase;
+        border: 2px solid white;
+    }
+        .text-content .btn:hover {
+            background-color: #B22830;
+            color: #fff;
+        }
+</style>
+
+

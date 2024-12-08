@@ -1,0 +1,216 @@
+﻿/* CSS cho phần giao diện sản phẩm */
+.quantity_control {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.quantity_button {
+    padding: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #bf0000;
+    background-color: #FFF5E1;
+    border: 1px solid #bf0000;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 40px;
+    text-align: center;
+}
+
+    .quantity_button:hover {
+        background-color: #bf0000;
+        color: #FFFFFF;
+        border-color: #bf0000;
+    }
+
+    .quantity_button:disabled {
+        background-color: #f0f0f0;
+        color: #ddd;
+        border-color: #ddd;
+        cursor: not-allowed;
+    }
+
+#productQuantity {
+    width: 60px;
+    text-align: center;
+    font-size: 18px;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 0;
+}
+
+#productinfor {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.product_info_r .product_wrap_r {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.inforr_product {
+    margin-top: 20px;
+}
+
+.info_product_title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.info_product_price .price {
+    font-size: 22px;
+    color: #d9534f;
+    font-weight: bold;
+}
+
+.option_sizes .option_title {
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+.product_options .opt_size {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+}
+
+.product__info__item__list__item {
+    cursor: pointer;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 80px;
+}
+
+    .product__info__item__list__item .circle {
+        margin-top: 5px;
+    }
+
+    .product__info__item__list__item:hover,
+    .product__info__item__list__item.active {
+        background-color: #f5f5f5;
+        border-color: #d9534f;
+    }
+
+.related-products {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+    .related-products .product {
+        text-align: center;
+        width: 150px;
+    }
+
+    .related-products img {
+        width: 100%;
+        height: auto;
+        border-radius: 5px;
+    }
+
+    .related-products h4 {
+        font-size: 16px;
+        margin: 10px 0;
+    }
+
+#productinfor {
+    display: flex;
+    padding: 20px;
+    border-radius: 8px;
+    align-items: center;
+}
+
+.product-image {
+    flex: 1;
+    text-align: center;
+}
+
+    .product-image img {
+        width: 100%;
+        border-radius: 5px;
+    }
+
+.product_info_r {
+    flex: 1;
+    padding-left: 20px;
+    font-family: "SF Pro Display", sans-serif;
+}
+
+.info_product_title {
+    font-size: 28px;
+    color: #000;
+    font-weight: bold;
+    margin-bottom: 18px;
+}
+
+.info_product_price {
+    color: #bf0000;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 18px;
+}
+
+.option_sizes, .option_toppings {
+    margin-bottom: 15px;
+}
+
+.option_title {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.product_options {
+    display: flex;
+    gap: 10px;
+}
+
+.option_button {
+    border: 1px solid #bf0000;
+    border-radius: 5px;
+    padding: 8px 12px;
+    color: #bf0000;
+    background-color: #FFF5E1;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+    .option_button.selected {
+        background-color: #bf0000;
+        color: #FFFFFF;
+    }
+
+.order_button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px;
+    font-weight: bold;
+    color: #FFFFFF;
+    background-color: #bf0000;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.product_buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.order_button:hover {
+    opacity: 0.8;
+}
+/* CSS cho phần giao diện sản phẩm */

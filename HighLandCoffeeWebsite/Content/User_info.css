@@ -1,0 +1,154 @@
+﻿/* Cấu trúc chung */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Cải thiện thanh Sidebar */
+.nav-item .nav-link {
+    font-size: 16px;
+    padding: 12px 15px;
+    color: #333;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+    font-weight: 500;
+}
+
+    .nav-item .nav-link:hover {
+        background-color: #f1f1f1;
+        color: #b30505;
+    }
+
+    .nav-item .nav-link.active {
+        
+        color: #b30505;
+    }
+
+/* Sidebar layout */
+.nav.flex-column {
+    background-color: #ffffff;
+    margin-top: 10px;
+}
+
+/* Cải thiện tiêu đề "Thông tin tài khoản" */
+h2 {
+    text-align: center; /* Căn giữa */
+    color: #9c1c2e; /* Màu đỏ đô */
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+/* Card thông tin tài khoản */
+.card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.card-header {
+    background-color: #f1f1f1;
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+/* Các form input */
+.form-control {
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+    .form-control[readonly] {
+        background-color: #f9f9f9;
+        cursor: not-allowed;
+    }
+
+/* Nút chỉnh sửa và lưu */
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn {
+    font-size: 14px;
+    padding: 10px 20px;
+    border-radius: 4px;
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    color: white;
+    border: none;
+}
+
+.btn-success {
+    background-color: #28a745;
+    color: white;
+    border: none;
+}
+
+/* Nút lưu ẩn khi không chỉnh sửa */
+#save-button {
+    display: none;
+}
+
+/* Lịch sử mua hàng */
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+    table th, table td {
+        padding: 12px 15px;
+        text-align: left;
+    }
+
+    table th {
+        background-color: #f1f1f1;
+    }
+
+    table td {
+        background-color: #fff;
+        border-bottom: 1px solid #ddd;
+    }
+
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+.card {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #ddd;
+}
+
+.card-body img {
+    border-radius: 8px;
+    width: 60px;
+    height: 60px;
+}
+
+.card-footer {
+    background-color: #f8f9fa;
+    border-top: 1px solid #ddd;
+}
+
+.btn-reorder {
+    border-radius: 20px;
+}
+

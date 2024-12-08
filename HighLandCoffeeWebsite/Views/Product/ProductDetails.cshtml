@@ -1,0 +1,168 @@
+﻿@{
+    ViewBag.Title = "ProductDetails";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<link rel="stylesheet" href="~/Content/detailspro.css" />
+<style>
+    .fruite-item {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .fruite-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+    .fruite-img {
+        height: 200px;
+        overflow: hidden;
+        border-radius: 8px 8px 0 0;
+    }
+
+        .fruite-img img {
+            height: 100%;
+            object-fit: cover;
+        }
+
+    .fruite-item .btn {
+        font-size: 14px;
+    }
+
+    .fruite-item p {
+        margin: 0;
+        line-height: 1.4;
+    }
+</style>
+<div id="productinfor">
+    <div class="product_wrap_r container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="product-image text-center">
+                    <img src="@Url.Content("~/Content/img/" + Model.ImageUrl)" alt="@Model.Name" style="width: 70%; height: 70%; object-fit: cover;">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <form method="post" action="@Url.Action("AddToCart", "Product")" id="addToCartForm">
+                    <div class="product_info_r">
+                        <input type="hidden" name="prodID" value="@Model.ProductId" />
+                        <input type="hidden" name="price" value="@Model.Price" />
+                        <p class="info_product_title">@Model.Name</p>
+                        <div class="info_product_price" id="productPrice">
+                            @String.Format("{0:0,0} ₫", Model.Price)
+                        </div>
+
+                        <!-- Chọn size -->
+                        <div class="option_sizes">
+                            <p class="option_title">Chọn size</p>
+                            <div class="product_options" data-group="size">
+                                <input type="radio" name="size" value="S" id="size_S" class="option_button" data-price-modifier="0" />
+                                <label for="size_S">S</label>
+
+                                <input type="radio" name="size" value="M" id="size_M" class="option_button" data-price-modifier="10000" />
+                                <label for="size_M">M</label>
+
+                                <input type="radio" name="size" value="L" id="size_L" class="option_button" data-price-modifier="20000" />
+                                <label for="size_L">L</label>
+                            </div>
+                        </div>
+
+                        <!-- Chọn số lượng -->
+                        <div class="product_quantity">
+                            <p class="option_title">Số lượng</p>
+                            <div class="quantity_control">
+                                <button type="button" class="quantity_button" onclick="changeQuantity(-1)">-</button>
+                                <input type="number" name="quantity" id="productQuantity" value="1" min="1" />
+                                <button type="button" class="quantity_button" onclick="changeQuantity(1)">+</button>
+                            </div>
+                        </div>
+
+                        <br />
+
+                        <!-- Nút Thêm vào giỏ hàng -->
+                        <div class="product_buttons">
+                            <button class="order_button" type="submit">Thêm vào giỏ hàng</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <hr />
+        <div>
+            <strong>Mô tả sản phẩm</strong><br />
+            @Model.Description
+        </div>
+        <hr />
+        <strong>Sản phẩm liên quan</strong><br />
+        <div class="row g-4">
+    @foreach (var relatedProduct in ViewBag.RelatedProducts as List<HighLandCoffeeWebsite.Models.Product>)
+    {
+            <div class="col-md-6 col-lg-4 col-xl-3">
+                        <div class="rounded position-relative fruite-item shadow">
+                            <div class="fruite-img position-relative overflow-hidden">
+                                <img src="@Url.Content("~/Content/img/" + relatedProduct.ImageUrl)" class="img-fluid w-100 rounded-top" alt="">
+                                <div class="position-absolute top-0 start-0 bg-danger text-white px-2 py-1">Mới</div>
+                            </div>
+                            <div class="p-3 rounded-bottom bg-light">
+                                <h5 class="fw-bold text-center">@relatedProduct.Name</h5>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <br />
+                                    <p class="text-danger fs-5 fw-bold mb-0">@String.Format("{0:0,0} ₫", relatedProduct.Price)</p>
+                                    <a href="@Url.Action("ProductDetails", "Product", new { id = relatedProduct.ProductId })" class="btn btn-outline-danger btn-sm rounded-pill">Xem chi tiết</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    }
+    </div>
+</div>
+    </div>
+<script>
+    // Khi người dùng thay đổi size
+    document.querySelectorAll('input[name="size"]').forEach(radio => {
+        radio.addEventListener('change', function () {
+            const basePrice = parseInt('@Model.Price'); // Giá gốc của sản phẩm
+            const modifier = parseInt(this.getAttribute('data-price-modifier')) || 0; // Giá cộng thêm
+            const newPrice = basePrice + modifier; // Tính giá mới
+
+            // Hiển thị giá mới
+            document.getElementById('productPrice').textContent = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(newPrice);
+        });
+    });
+
+    // Kiểm tra size khi gửi form
+    document.getElementById("addToCartForm").addEventListener("submit", function (event) {
+        // Lấy danh sách các nút radio của size
+        const sizeOptions = document.querySelectorAll('input[name="size"]');
+        let sizeSelected = false;
+
+        // Kiểm tra xem có size nào được chọn không
+        sizeOptions.forEach(option => {
+            if (option.checked) {
+                sizeSelected = true;
+            }
+        });
+
+        // Nếu chưa chọn size, hiển thị thông báo và ngăn form gửi đi
+        if (!sizeSelected) {
+            alert("Vui lòng chọn size trước khi thêm vào giỏ hàng.");
+            event.preventDefault(); // Ngăn không cho form chuyển hướng
+        } else {
+            // Cập nhật giá vào input ẩn trước khi gửi form
+            const selectedRadio = document.querySelector('input[name="size"]:checked');
+            const basePrice = parseInt('@Model.Price');
+            const modifier = parseInt(selectedRadio.getAttribute('data-price-modifier')) || 0;
+            const finalPrice = basePrice + modifier;
+
+            document.querySelector('input[name="price"]').value = finalPrice;  // Cập nhật giá mới vào form nếu cần thiết
+        }
+    });
+
+    // Hàm thay đổi số lượng
+    function changeQuantity(amount) {
+        const input = document.getElementById("productQuantity");
+        let current = parseInt(input.value) || 1;
+        const newValue = Math.max(1, current + amount);
+        input.value = newValue;
+    }
+</script>

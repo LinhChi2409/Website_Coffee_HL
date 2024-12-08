@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+<link rel="stylesheet" href="~/Content/loginandreg.css" />
+<script src="https://unpkg.com/scrollreveal"></script>
+
+<div class="content">
+    <section>
+        <h2 class="title">Highlands Coffee® Là Của Chúng Mình.</h2>
+        <p class="subtitle">
+            Highlands Coffee® - điểm tụ họp của cộng đồng, nơi mọi người có thể kết nối và gắn kết với nhau bằng tình yêu dành cho cà phê, trà và các món ăn ngon
+        </p>
+        <div><a href="@Url.Action("Index", "Home")" class="get-started">Khám phá ngay</a></div>
+    </section>
+
+    <form method="post" action="@Url.Action("Login", "Account")">
+        <h1 class="title">Chào mừng bạn quay lại</h1>
+
+        <div class="box">
+            <div class="icon"><i class="bx bx-user-circle"></i></div>
+            <div class="input-box">
+                <label class="label">Nhập tên người dùng</label>
+                <input type="text" class="input" name="Username" required />
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="icon"><i class="bx bx-lock"></i></div>
+            <div class="input-box">
+                <label class="label">Nhập mật khẩu</label>
+                <input type="password" class="input" name="Password" required />
+            </div>
+        </div>
+
+        <input type="submit" class="login-button" value="Login" />
+
+        <div class="sign">Chưa có tài khoản ? <a href="@Url.Action("Register", "Account")">Đăng ký ngay</a></div>
+    </form>
+</div>
+
+<script src="~/Scripts/index.js"></script>
+<script>
+    const inputs = document.querySelectorAll(".input");
+
+    function addFocus() {
+        this.parentNode.parentNode.classList.add("focus"); // input-box
+    }
+
+    function removeFocus() {
+        if (this.value == "") {
+            this.parentNode.parentNode.classList.remove("focus");
+        }
+    }
+
+    inputs.forEach(i => {
+        i.addEventListener("focus", addFocus);
+        i.addEventListener("blur", removeFocus);
+    });
+
+    const sr = ScrollReveal({
+        distance: '20px',
+        duration: 2000,
+        reset: true
+    });
+
+    sr.reveal(section, { interval: 200, origin: 'left' });
+    sr.reveal(form, { interval: 200, origin: 'right' });
+</script>

@@ -1,0 +1,76 @@
+﻿@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+<link rel="stylesheet" href="~/Content/loginandreg.css" />
+<script src="https://unpkg.com/scrollreveal"></script>
+
+<div class="content">
+    <form method="post" action="@Url.Action("Register", "Account")">
+        <h1 class="title">Tạo tài khoản</h1>
+
+        <div class="box">
+            <div class="icon">
+                <i class="bx bx-user-circle"></i>
+            </div>
+            <div class="input-box">
+                <label class="label" for="Username">Nhập tên tài khoản của bạn</label>
+                <input type="text" id="Username" name="Username" class="input" required />
+            </div>
+        </div>
+
+        @*<div class="box">
+            <div class="icon">
+                <i class="bx bx-envelope"></i>
+            </div>
+            <div class="input-box">
+                <label class="label" for="Email">Enter your email</label>
+                <input type="email" id="Email" name="Email" class="input" required />
+            </div>
+        </div>*@
+
+        <div class="box">
+            <div class="icon">
+                <i class="bx bx-lock"></i>
+            </div>
+            <div class="input-box">
+                <label class="label" for="Password">Nhập mật khẩu</label>
+                <input type="password" id="Password" name="Password" class="input" required />
+            </div>
+        </div>
+
+        <input type="submit" class="login-button" value="Register" />
+        <div class="sign">Đã có tài khoản <a href="@Url.Action("Login", "Account")">Đăng nhập ngay</a></div>
+    </form>
+</div>
+
+<script>
+    const inputs = document.querySelectorAll(".input");
+
+    function addFocus() {
+        this.parentNode.parentNode.classList.add("focus");
+    }
+
+    function removeFocus() {
+        if (this.value == "") {
+            this.parentNode.parentNode.classList.remove("focus");
+        }
+    }
+
+    inputs.forEach(input => {
+        input.addEventListener("focus", addFocus);
+        input.addEventListener("blur", removeFocus);
+    });
+
+    const sr = ScrollReveal({
+        distance: '20px',
+        duration: 2000,
+        reset: true
+    });
+
+    sr.reveal(`form`, { interval: 200, origin: 'right' });
+</script>
+
+

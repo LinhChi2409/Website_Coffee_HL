@@ -1,0 +1,7 @@
+.vs/
+obj/
+*obj/
+**obj/
+
+HighLandCoffeeWebsite/bin/
+**bin/

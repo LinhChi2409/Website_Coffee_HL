@@ -1,0 +1,84 @@
+﻿@model List<HighLandCoffeeWebsite.Models.Product>
+
+@{
+    ViewBag.Title = "ViewProduct";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet" href="~/Content/cssFormat.css" />
+<style>
+    .fruite-item {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .fruite-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+    .fruite-img {
+        height: 200px;
+        overflow: hidden;
+        border-radius: 8px 8px 0 0;
+    }
+
+        .fruite-img img {
+            height: 100%;
+            object-fit: cover;
+        }
+
+    .fruite-item .btn {
+        font-size: 14px;
+    }
+
+    .fruite-item p {
+        margin: 0;
+        line-height: 1.4;
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 mb-4" style="margin-top: 25px;">
+            <form method="get" action="@Url.Action("Search", "Product")" class="d-flex">
+                <input type="text" name="query" class="form-control me-2" placeholder="Nhập tên sản phẩm hoặc loại sản phẩm" />
+                <button type="submit" class="btn btn-outline-danger">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+    @foreach (var categoryGroup in Model.GroupBy(p => p.Category.Name))
+    {
+        <div class="row mb-4">
+            <div class="col-12">
+                <h2 class="about_taital" style="font-weight:bold;color:#53382C">@categoryGroup.Key</h2>
+            </div>
+
+            <!-- Products -->
+            <div class="row g-4">
+                @foreach (var item in categoryGroup)
+                {
+                    <div class="col-md-6 col-lg-4 col-xl-3">
+                        <div class="rounded position-relative fruite-item shadow">
+                            <div class="fruite-img position-relative overflow-hidden">
+                                <img src="@Url.Content("~/Content/img/" + @item.ImageUrl)" class="img-fluid w-100 rounded-top" alt="">
+                                <div class="position-absolute top-0 start-0 bg-danger text-white px-2 py-1">Mới</div>
+                            </div>
+                            <div class="p-3 rounded-bottom bg-light">
+                                <h5 class="fw-bold text-center">@item.Name</h5>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <br />
+                                    <p class="text-danger fs-5 fw-bold mb-0">@String.Format("{0:0,0} ₫", @item.Price)</p>
+                                    <a href="@Url.Action("ProductDetails", "Product", new { id = item.ProductId })" class="btn btn-outline-danger btn-sm rounded-pill">Xem chi tiết</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+    @if (!Model.Any())
+    {
+        <div class="alert alert-warning text-center">Không tìm thấy sản phẩm phù hợp!</div>}
+</div>

@@ -1,0 +1,110 @@
+﻿@model List<HighLandCoffeeWebsite.Models.Store>
+
+@{ ViewBag.Title = "Index";
+                Layout = "~/Views/Shared/_LayoutPage.cshtml"; }
+
+<div class="store container" style="background-color:white">
+
+    <div class="row justify-content-center">
+        <div class="col-12 text-center mb-4">
+            <h1 class="about_taital" style="font-weight:bold;color:#53382C">DANH SÁCH CỬA HÀNG</h1>
+            <br />
+        </div>
+    </div>
+    @if (Model != null && Model.Count > 0)
+    {
+<div class="row">
+    @foreach (var store in Model)
+    {
+<div class="col-md-4 mb-4">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title text-danger font-weight-bold" style="font-size:20px">
+                <i class="fas fa-store"></i> @store.StoreName
+            </h5>
+            <p class="card-text">
+                <h5> @store.Address</h5>
+                <i class="fa fa-phone" style="color: #aa1818;"></i> @store.PhoneNumber <br />
+                <i class="fa fa-clock-o" style="color: #aa1818;"></i> @store.OpeningHours - @store.ClosingHours <br />
+                <h5> Wifi Miễn Phí</h5>
+                <h5>Thanh toán bằng thẻ</h5>
+            </p>
+        </div>
+    </div>
+</div>}
+</div> }
+else
+{
+<div class="text-center">
+    <p class="text-danger">Không tìm thấy cửa hàng nào phù hợp với từ khóa.</p>
+</div>}
+</div>
+
+<!-- Styles -->
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    .store {
+        background-color: #f9f9f9;
+        padding: 20px 0;
+    }
+
+    .form-group label {
+        font-weight: bold;
+    }
+
+    .card {
+        transition: 0.3s;
+    }
+
+        .card:hover {
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+        }
+</style>
+<script>
+    $('#districtSelect').change(function () {
+        const district = $(this).val();
+
+        $.ajax({
+            url: '/Product/FilterByDistrict',
+            type: 'GET',
+            data: { district: district },
+            success: function (response) {
+                renderStoreList(response);
+            },
+            error: function () {
+                alert('Đã xảy ra lỗi khi lọc theo quận.');
+            }
+        });
+    });
+
+    // Hàm hiển thị danh sách cửa hàng
+    function renderStoreList(stores) {
+        const $storeList = $('#storeList');
+        $storeList.empty();
+
+        if (stores.length === 0) {
+            $storeList.append('<p>Không tìm thấy cửa hàng nào.</p>');
+            return;
+        }
+
+        stores.forEach(store => {
+            const storeHtml = `
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">${store.StoreName}</h5>
+                        <p class="card-text">Địa chỉ: ${store.Address}</p>
+                        <p class="card-text">SĐT: ${store.PhoneNumber}</p>
+                        <p class="card-text">Email: ${store.Email}</p>
+                        <p class="card-text">Giờ mở cửa: ${store.OpeningHours}</p>
+                        <p class="card-text">Giờ đóng cửa: ${store.ClosingHours}</p>
+                        <p class="card-text">Mô tả: ${store.Description}</p>
+                    </div>
+                </div>`;
+            $storeList.append(storeHtml);
+        });
+    }
+;
+</script>

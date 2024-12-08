@@ -1,0 +1,53 @@
+﻿@model List<HighLandCoffeeWebsite.Models.Admin_Product>
+@{
+    ViewBag.Title = "ViewProduct";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+
+<div class="mainProduct">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>NAME</th>
+                <th>DESCRIPTION</th>
+                <th>PRICE</th>
+                <th>IMAGE</th>
+                <th>CATEGORY</th>
+                <th>ACTION</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th scope="row">@item.productID</th>
+                    <td>@item.productName</td>
+                    <td>@item.productDescription</td>
+                    <td>@item.price</td>
+                    <td><img src="@Url.Content("~/Content/img/"+item.images)" width="100px" height="100px" style="padding: 5px" /></td>
+                    <td>@item.productTypeID</td>
+                    <td>
+                        <a href="~/Admin/DeleteProduct/@item.productID" type="button" class="btn btn-danger mb-3 text-uppercase">Deleted</a>
+                    </td>
+                    <td>
+                        <a href="~/Admin/UpdateProduct/@item.productID" type="button" class="btn btn-danger mb-3 text-uppercase">Updated</a>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <p class="text-danger">
+        @if (ViewData["Err"] != null)
+        {
+            @ViewData["Err"]
+        }
+    </p>
+    <div class="d-grid gap-2 col-6 mx-auto">
+        <a href="~/Admin/AddProduct" type="button" class="btn btn-danger text-uppercase"> Add product</a>
+    </div>
+</div>
+

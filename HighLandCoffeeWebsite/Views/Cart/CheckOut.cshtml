@@ -1,0 +1,9 @@
+﻿@{
+    ViewBag.Title = "CheckOut";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+@if (ViewData["checkoutSuccess"] != null)
+{
+    <h3>@ViewData["checkoutSuccess"]</h3>
+}

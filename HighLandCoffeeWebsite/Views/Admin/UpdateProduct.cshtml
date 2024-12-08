@@ -1,0 +1,94 @@
+﻿@model HighLandCoffeeWebsite.Models.Admin_Product
+
+@{
+    ViewBag.Title = "UpdateProduct";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+<div class="mainAddProduct">
+    <h2 class="text-center p-3">UPDATES PRODUCT</h2>
+    <form method="post" action="~/Admin/UpdateProduct">
+        <input type="hidden" name="productID" value="@Model.productID" />
+        <div class="form-floating mb-3">
+            @Html.TextBoxFor(model => model.productName, new
+       {
+           @class = "form-control",
+           id = "productName",
+           placeholder = "Product Name",
+           value = Model.productName
+           //name = "name"
+       })
+            <label for="productName">Product Name</label>
+            @Html.ValidationMessageFor(model => model.productName, "", new { @class = "text-danger" })
+
+        </div>
+        <div class="form-floating mb-3">
+            @Html.TextAreaFor(model => model.productDescription, new
+       {
+           @class = "form-control",
+           id = "productDescription",
+           placeholder = "Product Description",
+           value = Model.productDescription
+           //name = "description"
+       })
+            <label for="productDescription">Product Description</label>
+            @Html.ValidationMessageFor(model => model.productDescription, "", new { @class = "text-danger" })
+
+        </div>
+        <div class="form-floating mb-3">
+            @Html.TextBoxFor(model => model.price, new
+       {
+           @class = "form-control",
+           id = "price",
+           placeholder = "Price",
+           value = Model.price
+           //name = "price"
+       })
+            <label for="price">Price</label>
+            @Html.ValidationMessageFor(model => model.price, "", new { @class = "text-danger" })
+
+        </div>
+        <div class="form-floating mb-3">
+
+            @Html.TextBoxFor(model => model.images, new
+       {
+           @class = "form-control",
+           type = "file",
+           id = "image",
+           placeholder = "Image"
+           //name = "img"
+       })
+            <label for="Address">Image</label>
+            @Html.ValidationMessageFor(model => model.images, "", new { @class = "text-danger" })
+
+        </div>
+
+        </div>
+
+        <div class="form-floating mb-3">
+            @Html.DropDownListFor(model => model.productTypeID, new List<SelectListItem>
+       {
+            new SelectListItem {Text = "1. Cà phê pha phin", Value = "1"},
+             new SelectListItem {Text = "2. Cà phê espresso", Value = "2"},
+             new SelectListItem {Text = "3. Trà", Value = "3"},
+             new SelectListItem {Text = "4. Freeze", Value = "4"},
+             new SelectListItem {Text = "5. Thức uống khác", Value = "5"}
+
+
+       }, "Select product type", new
+       {
+           @class = "form-control",
+           id = "productType"
+           //name = "typeID"
+       })
+            <label for="productType">Product Type</label>
+            @Html.ValidationMessageFor(model => model.productTypeID, "", new { @class = "text-danger" })
+
+        </div>
+
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <button type="submit" class="btn btn-danger justify-content-lg-between">Update</button>
+        </div>
+
+    </form>
+</div>

@@ -1,0 +1,166 @@
+﻿
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+@{
+    var topProducts = ViewBag.TopProducts as IEnumerable<dynamic>;
+}
+<style>
+    .card {
+        border: none;
+        border-radius: 15px;
+    }
+
+        .card h6 {
+            font-weight: 500;
+        }
+
+        .card h2 {
+            font-size: 2rem;
+            margin: 10px 0;
+        }
+
+    #revenueChart {
+        max-height: 300px;
+    }
+
+    .table-borderless th, .table-borderless td {
+        vertical-align: middle;
+    }
+
+        .table-borderless td img {
+            border-radius: 8px;
+        }
+
+    .table-responsive {
+        margin-top: 20px;
+    }
+    .custom-table thead tr th,
+    .custom-table tbody tr td {
+        border-top: 1px solid #ddd; /* Kẻ đường ngang */
+    }
+
+    .custom-table tbody tr:last-child td {
+        border-bottom: 1px solid #ddd; /* Kẻ đường ngang cuối cùng */
+    }
+
+    .custom-table thead tr th:first-child,
+    .custom-table thead tr th:last-child,
+    .custom-table tbody tr td:first-child,
+    .custom-table tbody tr td:last-child {
+        border-left: none; /* Bỏ kẻ đường dọc */
+        border-right: none; /* Bỏ kẻ đường dọc */
+    }
+
+</style>
+
+<div class="container mt-4">
+    <div class="row">
+        <!-- Biểu đồ doanh thu -->
+        <div class="col-lg-9">
+            <div class="card p-4 shadow">
+                <h3>Biểu đồ doanh thu</h3>
+                <canvas id="revenueChart" class="mt-5"></canvas>
+            </div>
+            <div class="mt-4">
+                <h3 class="mb-3">Top 5 sản phẩm bán chạy</h3>
+                <div class="table-responsive">
+                    <table class="table custom-table">
+                        <thead>
+                            <tr>
+                                <th>Sản phẩm</th>
+                                <th>Hình ảnh</th>
+                                <th>Số lượng đã bán</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (topProducts != null)
+                            {
+                                foreach (var product in topProducts)
+                                {
+                                    <tr>
+                                        <td>@product.Name</td>
+                                        <td>
+                                            <img src="@Url.Content("~/Content/img/" + @product.ImageUrl)" alt="@product.Name" class="img-thumbnail" style="width: 50px; height: 50px;">
+                                        </td>
+                                        <td>@product.TotalSold</td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="3">Không có dữ liệu.</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tổng số liệu -->
+        <div class="col-lg-3">
+            <div class="card p-4 mb-3 shadow" style="background-color: #FCDAD5;">
+                <h6 class="mb-0">Tổng doanh thu</h6>
+                <h2>@String.Format("{0:0,0} đ", ViewBag.TotalRevenue ?? 0)</h2>
+            </div>
+            <div class="card p-4 mb-3 shadow" style="background-color: #AFD788; ">
+                <h6 class="mb-0">Tổng đơn hàng</h6>
+                <h2>@ViewBag.TotalOrders</h2>
+            </div>
+            <div class="card p-4 mb-3 shadow" style="background-color: #FACE9C; ">
+                <h6 class="mb-0">Số lượng người dùng</h6>
+                <h2>@ViewBag.TotalUsers</h2>
+            </div>
+            <div class="card p-4 shadow" style="background-color: #BFCAE6; ">
+                <h6 class="mb-0">Số lượng sản phẩm</h6>
+                <h2>@ViewBag.TotalProducts</h2>
+            </div>
+        </div>
+    </div>
+    
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('revenueChart').getContext('2d');
+
+    // Dữ liệu từ ViewBag
+    const monthlyRevenue = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.MonthlyRevenue));
+
+    // Chuẩn hóa dữ liệu cho Chart.js
+    const labels = monthlyRevenue.map(data => `Month ${data.Month}`);
+    const data = monthlyRevenue.map(data => data.Total);
+
+    const revenueChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Revenue',
+                data: data,
+                borderColor: '#007bff',
+                backgroundColor: 'rgba(0, 123, 255, 0.2)',
+                fill: true,
+                tension: 0.4
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                x: {
+                    grid: { display: false }
+                },
+                y: {
+                    ticks: { beginAtZero: true }
+                }
+            }
+        }
+    });
+</script>

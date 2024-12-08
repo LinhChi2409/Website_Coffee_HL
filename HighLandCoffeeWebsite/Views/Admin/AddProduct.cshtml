@@ -1,0 +1,81 @@
+﻿
+@model HighLandCoffeeWebsite.Models.Admin_Product
+
+@{
+    ViewBag.Title = "AddProduct";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+<style>
+    .mainAddProduct {
+        padding:0;
+    }
+</style>
+<div class="mainAddProduct">
+    <h2 class="text-center p-3 text-danger">ADD PRODUCT</h2>
+    <form method="post" action="~/Admin/AddProduct">
+        <div class="form-floating mb-3">
+            <label for="productType">Product Type</label>
+            @Html.DropDownListFor(model => model.productTypeID,
+                                   (IEnumerable<SelectListItem>)ViewBag.Categories,
+                                   "Select product type",
+                                   new { @class = "form-control", id = "productType" })
+
+            @Html.ValidationMessageFor(model => model.productTypeID, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-floating mb-3">
+            <label for="Address">Image</label>
+            @Html.TextBoxFor(model => model.images, new
+            {
+                @class = "form-control",
+                type = "file",
+                id = "image",
+                placeholder = "Image"
+            })
+
+            @Html.ValidationMessageFor(model => model.images, "", new { @class = "text-danger" })
+
+        </div>
+        <div class="form-floating mb-3">
+            <label for="productName">Product Name</label>
+            @Html.TextBoxFor(model => model.productName, new
+            {
+                @class = "form-control",
+                id = "productName",
+                placeholder = "Product Name"
+            })
+            @Html.ValidationMessageFor(model => model.productName, "", new { @class = "text-danger" })
+
+        </div>
+        <div class="form-floating mb-3">
+            <label for="productDescription">Product Description</label>
+            @Html.TextAreaFor(model => model.productDescription, new
+            {
+                @class = "form-control",
+                id = "productDescription",
+                placeholder = "Product Description"
+            })
+
+            @Html.ValidationMessageFor(model => model.productDescription, "", new { @class = "text-danger" })
+
+        </div>
+        <div class="form-floating mb-3">
+            <label for="price">Price</label>
+            @Html.TextBoxFor(model => model.price, new
+            {
+                @class = "form-control",
+                id = "price",
+                placeholder = "Price"
+            })
+
+            @Html.ValidationMessageFor(model => model.price, "", new { @class = "text-danger" })
+
+        </div>
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <button type="submit" class="btn btn-danger justify-content-lg-between">Add Product</button>
+        </div>
+
+    </form>
+</div>
+
+
+
